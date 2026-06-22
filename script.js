@@ -37,7 +37,7 @@ function proses(){
   }
 }
 setInterval(proses, 16);
-// 🎲 random state tiap 1 detik
+
 setInterval(randomState, 1000);
 
 function randomState() {
@@ -76,14 +76,14 @@ function mancing() {
   let bonus_progres_dengan_perhitungan_mtk = 1.0 * ikan.progres
     
 
-    // 🔴 rod
+    
     if (holding) rodPos += 3;
     else rodPos -= 3;
 
     if (rodPos < 0) rodPos = 0;
     if (rodPos > 300) rodPos = 300;
 
-    // 🎯 overlap
+    
     let ikan_control = ikan.control;
   if (
     rodPos >= fishPos &&
@@ -156,7 +156,7 @@ function dapettin_ikan_sesuai_kg(rodKg) {
 }
 function notif_kelangkaan(kelangkaan) {
   let notif = document.getElementById("notif");
-  notif.src = `asset/warning notif/${kelangkaan}.png`;
+  notif.src = `${kelangkaan}.png`;
   notif.classList.remove("hidden");
   setTimeout(() => {
     notif.classList.add("hidden")
