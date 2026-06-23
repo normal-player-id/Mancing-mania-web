@@ -36,7 +36,7 @@ const fish_DB = {
       "nama" : "batu kramat",
       "kelangkaan" : "hoki",
       "min_kg" : 9999999,
-      "kekuatan" : 77.7,
+      "kekuatan" : 0.0,
       "progres" : 0.08,
       "control" : 300
     },
