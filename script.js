@@ -27,17 +27,15 @@ function proses(){
     document.getElementById("fish").style.display = 'block';
     document.getElementById("bar").style.display = 'block'
     document.getElementById("rod").style.display = 'block';
-    document.getElementById("start").style.display = 'none'
   }
   else {
       document.getElementById("fish").style.display = 'none';
     document.getElementById("bar").style.display = 'none'
     document.getElementById("rod").style.display = 'none'
-    document.getElementById("start").style.display = 'block'
   }
 }
 setInterval(proses, 16);
-
+//  random state tiap 1 detik
 setInterval(randomState, 1000);
 
 function randomState() {
@@ -105,16 +103,18 @@ function mancing() {
       ini_mancing = false;
       alert("Ikan kabur!");
       ikan_di_masa_depan = null;
+      document.getElementById("start").style.display = 'block'
     }
     if (progress > 100) {
       ini_mancing = false;
-      let harga = berat_ikan * 10;
+      let harga = berat_ikan * ikan_di_masa_depan.harga_kg;
       uang += harga
       document.getElementById("uang").innerText = uang.toLocaleString();
       alert(`dapet ikan: ${ikan.nama}  `+
       `berat ikan: ${berat_ikan} kg   `+
       `ikan ter jual di harga: ${harga} uang`
       );
+      document.getElementById("start").style.display = 'block'
     }
 
     // render
@@ -126,6 +126,7 @@ async function cek_mancing() {
   progress = 0;
   rodPos = -1;
   fishPos = -1;
+  document.getElementById("start").style.display = 'none'
   ikan_di_masa_depan = dapet_ikan();
   notif_kelangkaan(ikan_di_masa_depan.kelangkaan)
   berat_ikan = random_berat_ikan(ikan_di_masa_depan)
@@ -147,7 +148,7 @@ function dapettin_ikan_sesuai_kg(rodKg) {
     let tersedia = [];
     for (let id in fish_DB.item_db) {
         let ikan = fish_DB.item_db[id];
-        if (ikan.min_kg <= rodKg) {
+        if (ikan.max_kg <= rodKg) {
             tersedia.push(ikan);
         }
     }
@@ -167,6 +168,6 @@ function delay(ms) {
 }
 function random_berat_ikan(ikan) {
   return Math.floor(
-    Math.random() * (max_kg - ikan.min_kg + 1)
+    Math.random() * (ikan.max_kg - ikan.min_kg + 1)
   ) + ikan.min_kg;
 }
